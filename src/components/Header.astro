@@ -1,0 +1,34 @@
+---
+import { Image } from 'astro:assets'
+import MobileMenu from '@components/mobil-menu'
+
+type Props = {
+  logo: string
+  links: string[]
+}
+
+const { logo, links } = Astro.props
+---
+
+<header
+  class="mx-auto mb-8 mt-7 flex h-7 max-w-[69.375rem] items-center justify-between lg:mb-[3.44rem] lg:mt-[5.56rem]"
+>
+  <Image src={logo} alt="Logo for News Homepage" width="64.092" height="39.9" />
+  <nav class="hidden md:block">
+    <ul class="flex gap-x-10">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              class="text-[0.9375rem] font-normal leading-relaxed text-body transition-colors hover:text-primary"
+              href="/"
+            >
+              {link}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <MobileMenu links={links} client:only />
+</header>

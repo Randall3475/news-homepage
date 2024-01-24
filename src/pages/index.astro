@@ -1,0 +1,130 @@
+---
+import { Image } from 'astro:assets'
+import Layout from '@layouts/Layout.astro'
+import Header from '@components/Header.astro'
+
+const logo = '/images/logo.svg'
+const links = ['Home', 'New', 'Popular', 'Trending', 'Categories']
+const title = 'The Bright Future of Web 3.0?'
+const news = [
+  {
+    title: 'Hydrogen VS Eectric Cars',
+    intro: 'Will hydrogen-fueled cars ever catch up to EVs?',
+  },
+  {
+    title: 'The Downsides of AI Artistry',
+    intro:
+      'What are the possible adverse effects of on-demand AI image generation?',
+  },
+  {
+    title: 'Is VC Funding Drying Up?',
+    intro:
+      'Private funding by VC firms is down 50% YOY. We take a look at what that means.',
+  },
+]
+const trending = [
+  {
+    thumbnail: '/images/image-retro-pcs.jpg',
+    title: 'Reviving Retro PCs',
+    intro: 'What happens when old PCs are given modern upgrades?',
+  },
+  {
+    thumbnail: '/images/image-top-laptops.jpg',
+    title: 'Top 10 Laptops of 2022',
+    intro: 'Our best picks for various needs and budgets.',
+  },
+  {
+    thumbnail: '/images/image-gaming-growth.jpg',
+    title: 'The Growth of Gaming',
+    intro: 'How the pandemic has sparked fresh opportunities.',
+  },
+]
+---
+
+<Layout title="News Homepage">
+  <Header logo={logo} links={links} />
+  <main class="mx-auto max-w-[69.375rem]">
+    <article
+      class="grid grid-cols-12 gap-y-16 lg:gap-x-[1.87rem] lg:gap-y-[4.5rem]"
+    >
+      <section class="col-span-12 grid lg:col-span-8 lg:grid-cols-2">
+        <Image
+          class="h-full w-full lg:col-span-2 lg:h-max"
+          src="/images/image-web-3-desktop.jpg"
+          alt="Hero"
+          width="730"
+          height="300"
+        />
+        <h1
+          class="mb-4 mt-6 text-pretty text-[2.5rem] font-extrabold leading-[3.5rem] text-secondary lg:mb-0 lg:mt-0 lg:text-[3.5rem]"
+        >
+          {title}
+        </h1>
+        <div>
+          <p
+            class="mb-4 text-pretty text-[0.9375rem] leading-relaxed text-body lg:mb-[1.81rem]"
+          >
+            We dive into the next evolution of the web that claims to put the
+            power of the platforms back into the hands of the people. But is it
+            really fulfilling its promise?
+          </p>
+          <a
+            class="max-w block w-max bg-primary px-8 py-4 text-sm font-bold uppercase tracking-[0.27344rem] text-main transition-colors hover:bg-secondary hover:text-main"
+            href="/"
+          >
+            Read more</a
+          >
+        </div>
+      </section>
+      <section
+        class="col-span-12 bg-secondary px-6 pb-[1.94rem] pt-8 lg:col-span-4"
+      >
+        <h2 class="mb-[2.12rem] text-[2.5rem] font-bold leading-10 text-accent">
+          News
+        </h2>
+        {
+          news.map((item, index) => (
+            <>
+              <div class="group">
+                <h3 class="mb-2 text-xl font-extrabold text-main transition-colors hover:text-accent">
+                  <a href="/">{item.title}</a>
+                </h3>
+                <p class="mb-[1.81rem] text-[0.9375rem] leading-relaxed text-misc group-last:mb-0">
+                  {item.intro}
+                </p>
+              </div>
+              {index !== news.length - 1 && (
+                <hr class="mb-[1.94rem] text-body" />
+              )}
+            </>
+          ))
+        }
+      </section>
+      <section
+        class="col-span-12 grid grid-cols-[repeat(auto-fill,_minmax(275px,_1fr))] gap-x-[1.87rem] gap-y-8"
+      >
+        {
+          trending.map((item, index) => (
+            <div class="grid grid-cols-[auto_1fr] items-center gap-x-6">
+              <Image
+                src={item.thumbnail}
+                alt={item.title}
+                width="100"
+                height="127"
+              />
+              <hgroup>
+                <p class="text-[2rem] font-bold leading-loose text-misc">
+                  0{index + 1}
+                </p>
+                <h3 class="mb-[0.56] text-lg font-extrabold text-secondary transition-colors hover:text-primary">
+                  <a href="/">{item.title}</a>
+                </h3>
+                <p class="text-[0.9375rem] leading-relaxed">{item.intro}</p>
+              </hgroup>
+            </div>
+          ))
+        }
+      </section>
+    </article>
+  </main>
+</Layout>
